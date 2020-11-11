@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pl-PL">
+<head>
+    <meta charset="UTF-8">
+    <title>Drugie ćwiczenie praktyczne</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="icon" href="images/logotype32.png">
+    <link rel="manifest" href="manifest.json">
+    <script src="scripts/enum/match-expressions.js"></script>
+    <script src="scripts/component/tag.js"></script>
+    <script src="scripts/component/parent-set.js"></script>
+</head>
+<body>
+<div class="wrapper">
+    <label for="editor-textarea" class="sr-only">Edytor</label>
+    <textarea class="editor" id="editor-textarea" autofocus></textarea>
+    <section class="renderer-window">
+        <p class="help">Aby wyświelić pomoc,<br/>kliknij tutaj dwukrotnie</p>
+    </section>
+    <section class="editor-parsed"></section>
+</div>
+
+<script>
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker
+            .register('scripts/worker/generate-page.js')
+            .then((registration) => {
+                console.log('ServiceWorker registration successful with scope: ', registration.scope);
+            })
+            .catch((err) => {
+                console.log('ServiceWorker registration failed: ', err);
+            });
+    }
+</script>
+<script src="scripts/main.js"></script>
+</body>
+</html>
