@@ -1,3 +1,4 @@
+importScripts('../component/renderable.js');
 importScripts('../component/page.js');
 
 onmessage = (e) => {
