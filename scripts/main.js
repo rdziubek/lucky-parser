@@ -1,18 +1,18 @@
-'use strict';
+`use strict`;
 
-const editorWindow = document.querySelector('.editor');
-const rendererWindow = document.querySelector('.renderer-window');
-const editorParsedWindow = document.querySelector('.editor-parsed');
-const generatePageWorker = new Worker('scripts/worker/generate-page.js');
+const editorWindow = document.querySelector(`.editor`);
+const rendererWindow = document.querySelector(`.renderer-window`);
+const editorParsedWindow = document.querySelector(`.editor-parsed`);
+const generatePageWorker = new Worker(`scripts/worker/generate-page.js`);
 
-rendererWindow.addEventListener('dblclick', () => {
-    alert('you have requested help!');
+rendererWindow.addEventListener(`dblclick`, () => {
+    alert(`you have requested help!`);
 });
 
-editorWindow.addEventListener('keyup', () => {
-    const scrambledContent = editorWindow.value;
+editorWindow.addEventListener(`keyup`, () => {
+    const scrambledPageDescription = editorWindow.value;
 
-    if (scrambledContent !== '') {
+    if (scrambledPageDescription !== ``) {
         generatePageWorker.postMessage(editorWindow.value);
     } else {
         rendererWindow.innerHTML = Strings.DISPLAY_HELP;
