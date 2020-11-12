@@ -16,6 +16,7 @@ editorWindow.addEventListener(`keyup`, () => {
         generatePageWorker.postMessage(editorWindow.value);
     } else {
         rendererWindow.innerHTML = Strings.USER_GUIDE;
+        rendererVerboseWindow.innerHTML = null;
     }
 });
 
