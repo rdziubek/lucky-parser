@@ -7,11 +7,11 @@ class ParentSet extends Tag {
     <title>${title}</title>
 </head>
 <body>
-${MatchExpressions.NEXT_SCOPE_POINTER}
+${Syntactics.NEXT_SCOPE_POINTER}
 </body>
 </html>`;
-        const verboseContent = Styler.Verbose.colourTagBoundaries(content,
-            Syntactics.VERBOSE_STYLE_CLASS_OPENING_TAG.PARENT_SET);
+        const verboseContent = Styler.Verbose.colourTagBoundaries(
+            Styler.Verbose.makeVerbose(content), Syntactics.VERBOSE_STYLE_CLASS_OPENING_TAG.PARENT_SET);
 
         super(content, verboseContent);
     }

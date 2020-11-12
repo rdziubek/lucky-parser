@@ -1,5 +1,5 @@
 const MatchExpressions = {
-    STARTING_TAG: /(<)(\w+)(.*)/,
-    ENDING_TAG: /(.*?)(\w+)(>$)/,
+    STARTING_TAG: /(&lt;)(\w+)(.*)/,
+    ENDING_TAG: /(.*?)(\w+)(&gt;$)/,
     TAG_UNCLOSED: ``,
 }

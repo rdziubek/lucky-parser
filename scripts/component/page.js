@@ -7,14 +7,28 @@ class Page extends Renderable {
             content: super.content,
             verboseContent: super.verboseContent,
         };
+        this._content = content;
+        this._verboseContent = verboseContent;
     }
 
     get content() {
         return super.content;
     }
 
+    set content(value) {
+        this._content = value;
+    }
+
     get verboseContent() {
         return super.verboseContent;
+    }
+
+    set verboseContent(value) {
+        this._verboseContent = value;
+    }
+
+    append(tag) {
+
     }
 
     serialise() {
