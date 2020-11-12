@@ -20,6 +20,8 @@ editorWindow.addEventListener(`keyup`, () => {
 });
 
 generatePageWorker.onmessage = (ev => {
-    rendererWindow.innerHTML = ev.data._renderedContent;
-    editorParsedWindow.innerHTML = ev.data._renderedContentStyledSource;
+    const serialisedPageInstance = ev.data;
+
+    rendererWindow.innerHTML = serialisedPageInstance.content;
+    editorParsedWindow.innerHTML = serialisedPageInstance.verboseContent;
 });
