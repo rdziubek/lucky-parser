@@ -36,6 +36,7 @@ html, body, .wrapper {
 body {
     margin: 0;
     padding: 0;
+    background: var(--color-bamboo);
 }
 
 .wrapper {
