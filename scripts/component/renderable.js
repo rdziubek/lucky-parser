@@ -1,7 +1,7 @@
 class Renderable {
     constructor(content, verboseContent) {
-        this._content = null;
-        this._verboseContent = null;
+        this._content = content;
+        this._verboseContent = verboseContent;
     }
 
     get content() {
