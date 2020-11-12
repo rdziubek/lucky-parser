@@ -2,7 +2,7 @@
 
 const editorWindow = document.querySelector(`.editor`);
 const rendererWindow = document.querySelector(`.renderer-window`);
-const rendererVerboseWindow = document.querySelector(`.editor-parsed`);
+const rendererVerboseWindow = document.querySelector(`.renderer-verbose-window`);
 const generatePageWorker = new Worker(`scripts/worker/generate-page.js`);
 
 rendererWindow.addEventListener(`dblclick`, () => {
