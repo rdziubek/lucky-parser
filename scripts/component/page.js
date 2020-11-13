@@ -33,6 +33,10 @@ class Page extends Renderable {
     }
 
     serialise() {
+        this._parcelable = {
+            content: super.content,
+            verboseContent: super.verboseContent,
+        }
         return this._parcelable;
     }
 }
