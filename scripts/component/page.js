@@ -7,8 +7,6 @@ class Page extends Renderable {
             content: super.content,
             verboseContent: super.verboseContent,
         };
-        this._content = content;
-        this._verboseContent = verboseContent;
     }
 
     get content() {
@@ -28,7 +26,10 @@ class Page extends Renderable {
     }
 
     append(tag) {
-
+        super.content = super.content
+            .replace(Syntactics.NEXT_SCOPE_POINTER, tag.content);
+        super.verboseContent = super.verboseContent
+            .replace(Syntactics.NEXT_SCOPE_POINTER, tag.verboseContent);
     }
 
     serialise() {
