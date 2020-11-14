@@ -14,13 +14,19 @@ class Parser {
                     const looseProperties = [...tagScramble.description
                         .matchAll(MatchExpressions.TAG_SCRAMBLE_LOOSE_PROPERTIES)];
 
-                    const language = looseProperties[0][1];
-                    const encoding = looseProperties[1][1];
-                    const title = new StringProperty(looseProperties[2][1]).value;
+                    if (looseProperties.length < 3) {
+                        this._pageInstance.append(
+                            new InvalidTag(`Invalid tag signature`)
+                        );
+                    } else {
+                        const language = looseProperties[0][1];
+                        const encoding = looseProperties[1][1];
+                        const title = new StringProperty(looseProperties[2][1]).value;
 
-                    this._pageInstance.append(
-                        new ParentSet(language, encoding, title)
-                    );
+                        this._pageInstance.append(
+                            new ParentSet(language, encoding, title)
+                        );
+                    }
                 }
                     break;
                 default:
