@@ -1,6 +1,11 @@
 class StringProperty {
     constructor(rawProperty) {
-        this._value = rawProperty.substring(1, rawProperty.length - 1);
+        if (rawProperty[0] === `"` &&
+            rawProperty[rawProperty.length - 1] === `"`) {
+            this._value = rawProperty.substring(1, rawProperty.length - 1);
+        } else {
+            this._value = rawProperty;
+        }
     }
 
     get value() {
