@@ -4,9 +4,11 @@ class InvalidTag extends Tag {
      * @param {string} info Custom message to be returned.
      */
     constructor(info) {
-        const content = (info === undefined ? `Not a valid tag!` : info);
+        const content = `${(info === undefined ?
+            `Not a valid tag!` : info)
+        }\n${Syntactics.NEXT_SCOPE_POINTER}`;
 
-        super(content, content);
+        super(content, Styler.Verbose.makeVerbose(content));
     }
 }
 
