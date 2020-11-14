@@ -6,9 +6,11 @@ class InvalidTag extends Tag {
     constructor(info) {
         const content = `${(info === undefined ?
             `Not a valid tag!` : info)
-        }\n${Syntactics.NEXT_SCOPE_POINTER}`;
+        }${Syntactics.NEXT_SCOPE_POINTER}`;
 
-        super(content, Styler.Verbose.makeVerbose(content));
+        super(Styler.Rendered.designateTag(content, Syntactics.STYLE_CLASS_TAG.ERROR.INVALID),
+            Styler.Verbose.designateTag(
+                Styler.Verbose.makeVerbose(content),
+                Syntactics.STYLE_CLASS_TAG.ERROR.INVALID));
     }
 }
-
