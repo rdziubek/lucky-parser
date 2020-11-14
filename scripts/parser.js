@@ -14,7 +14,7 @@ class Parser {
                     const looseProperties = [...tagScramble.description
                         .matchAll(MatchExpressions.TAG_SCRAMBLE_LOOSE_PROPERTIES)];
 
-                    if (looseProperties.length < 3) {
+                    if (looseProperties.length !== 3) {
                         this._pageInstance.append(
                             new InvalidTag(`Invalid tag signature`)
                         );
