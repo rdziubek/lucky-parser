@@ -8,8 +8,18 @@ class Parser {
 
             switch (tagScramble.name) {
                 case TagNames.PARENT_SET: {
+                    /**
+                     * Property signature: language, encoding, title
+                     */
+                    const looseProperties = [...tagScramble.description
+                        .matchAll(MatchExpressions.TAG_SCRAMBLE_LOOSE_PROPERTIES)];
+
+                    const language = looseProperties[0][1];
+                    const encoding = looseProperties[1][1];
+                    const title = new StringProperty(looseProperties[2][1]).value;
+
                     this._pageInstance.append(
-                        new ParentSet('lang', 'encoding', 'title')
+                        new ParentSet(language, encoding, title)
                     );
                 }
                     break;

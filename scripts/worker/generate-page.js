@@ -5,6 +5,7 @@ importScripts(`../enum/html-escapes.js`);
 importScripts(`../enum/tag-names.js`);
 importScripts(`../styler.js`);
 importScripts(`../component/page.js`);
+importScripts(`../component/string-property.js`);
 importScripts(`../component/tag.js`);
 importScripts(`../component/invalid-tag.js`);
 importScripts(`../component/parent-set.js`);
