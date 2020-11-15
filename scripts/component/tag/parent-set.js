@@ -7,7 +7,6 @@ class ParentSet extends Tag {
     <title>${title}</title>
 </head>
 <body>
-test
 ${Syntactics.NEXT_SCOPE_POINTER}
 </body>
 </html>`;
