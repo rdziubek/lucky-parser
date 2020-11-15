@@ -9,7 +9,7 @@ rendererWindow.addEventListener(`dblclick`, () => {
     alert(`you have requested help!`);
 });
 
-editorWindow.addEventListener(`keyup`, () => {
+editorWindow.addEventListener(`input`, () => {
     const scrambledPageDescription = editorWindow.value;
 
     if (scrambledPageDescription !== ``) {
