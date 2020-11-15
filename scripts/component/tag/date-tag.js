@@ -1,6 +1,6 @@
 class DateTag extends Tag {
     constructor() {
-        const content = `<p id='datetime'>testhere</p><script>setTimeout(() => {
+        const content = `<span id='datetime'>testhere</span><script>setTimeout(() => {
     document.getElementById('datetime').innerHTML = new Date().toLocaleString();
 } ,1000)</script>`;
         const verboseContent = Styler.Verbose.designateTagBoundaries(
