@@ -1,0 +1,3 @@
+class FormTag extends Tag {
+
+}

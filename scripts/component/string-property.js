@@ -1,14 +1,10 @@
-class StringProperty {
+class StringProperty extends Property {
     constructor(rawProperty) {
-        if (rawProperty[0] === `"` &&
-            rawProperty[rawProperty.length - 1] === `"`) {
-            this._value = rawProperty.substring(1, rawProperty.length - 1);
-        } else {
-            this._value = rawProperty;
-        }
-    }
+        const value = (rawProperty[0] === `"` &&
+        rawProperty[rawProperty.length - 1] === `"` ?
+            rawProperty.substring(1, rawProperty.length - 1) :
+            rawProperty);
 
-    get value() {
-        return this._value;
+        super(value);
     }
 }

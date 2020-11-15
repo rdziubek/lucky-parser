@@ -1,6 +1,7 @@
 const MatchExpressions = {
-    STARTING_TAG: /(&lt;)(\w+)(.*)/,
-    ENDING_TAG: /(.*?)(\w+)(&gt;$)/,
+    NEXT_SCOPE_POINTER_VERBOSE: /&lt;br\/&gt;&lt;-/,
+    STARTING_TAG_VERBOSE: /(&lt;)(\w+)(.*)/,
+    ENDING_TAG_VERBOSE: /(.*?)(\w+)(&gt;$)/,
     TAG_UNCLOSED: ``,
     TAG_SCRAMBLE_ABSTRACT: /<\s*(\w+)(.*?)>/g,
     TAG_SCRAMBLE_ASSOCIATIVE_PROPERTIES: /(\w+)=(\w+)/g,

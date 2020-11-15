@@ -12,9 +12,9 @@ class Styler {
 
         static designateTagBoundaries(content, cssClass) {
             return content
-                .replace(MatchExpressions.STARTING_TAG,
+                .replace(MatchExpressions.STARTING_TAG_VERBOSE,
                     `$1${cssClass}$2${Syntactics.STYLE_CLASS_CLOSING_TAG}$3`)
-                .replace(MatchExpressions.ENDING_TAG, (_, remaining, tagName, bracket) =>
+                .replace(MatchExpressions.ENDING_TAG_VERBOSE, (_, remaining, tagName, bracket) =>
                     `${remaining}${tagName === null
                         ? tagName : `${cssClass}${tagName}${Syntactics.STYLE_CLASS_CLOSING_TAG}`
                     }${bracket}`);

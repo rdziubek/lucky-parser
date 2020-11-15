@@ -1,16 +1,16 @@
 class Parser {
     constructor(pageScramble) {
-        this._tagScrambles = pageScramble.matchAll(MatchExpressions.TAG_SCRAMBLE_ABSTRACT);
+        this._rawTagScrambles = pageScramble.matchAll(MatchExpressions.TAG_SCRAMBLE_ABSTRACT);
         this._pageInstance = new Page(Syntactics.NEXT_SCOPE_POINTER, Syntactics.NEXT_SCOPE_POINTER);
 
-        for (const scramble of this._tagScrambles) {
-            const tagScramble = new TagScramble(scramble[1], scramble[2]);
+        for (const rawScramble of this._rawTagScrambles) {
+            const tagScramble = new TagScramble(rawScramble[1], rawScramble[2]);
 
             switch (tagScramble.name) {
+                /**
+                 * Signature same as @see {@link ParentSet}
+                 */
                 case TagNames.PARENT_SET: {
-                    /**
-                     * Property signature: language, encoding, title
-                     */
                     const looseProperties = [...tagScramble.description
                         .matchAll(MatchExpressions.TAG_SCRAMBLE_LOOSE_PROPERTIES)];
 
@@ -29,9 +29,59 @@ class Parser {
                     }
                 }
                     break;
+                /**
+                 * Signature same as @see {@link ImgTag}
+                 */
+                case TagNames.IMG: {
+                    const looseProperties = [...tagScramble.description
+                        .matchAll(MatchExpressions.TAG_SCRAMBLE_LOOSE_PROPERTIES)];
+
+                    if (looseProperties.length !== 4) {
+                        this._pageInstance.append(
+                            new InvalidTag(`Invalid tag signature`)
+                        );
+                    } else {
+                        const mediaSource = new StringProperty(looseProperties[0][1]).value;
+                        const width = new NumberProperty(looseProperties[1][1]).value;
+                        const height = new NumberProperty(looseProperties[2][1]).value;
+                        const alternative = new StringProperty(looseProperties[3][1]).value;
+
+                        this._pageInstance.append(
+                            new ImgTag(mediaSource, width, height, alternative)
+                        );
+                    }
+                }
+                    break;
+                /**
+                 * Signature same as @see {@link TableTag}
+                 */
+                case TagNames.TABLE: {
+                    const looseProperties = [...tagScramble.description
+                        .matchAll(MatchExpressions.TAG_SCRAMBLE_LOOSE_PROPERTIES)];
+
+                }
+                    break;
+                /**
+                 * Signature same as @see {@link DateTag}
+                 */
+                case TagNames.DATE: {
+                    const looseProperties = [...tagScramble.description
+                        .matchAll(MatchExpressions.TAG_SCRAMBLE_LOOSE_PROPERTIES)];
+
+                    if (looseProperties.length !== 0) {
+                        this._pageInstance.append(
+                            new InvalidTag(`Invalid tag signature`)
+                        );
+                    } else {
+                        this._pageInstance.append(
+                            new DateTag()
+                        );
+                    }
+                }
+                    break;
                 default:
                     this._pageInstance.append(
-                        new InvalidTag()
+                        new InvalidTag(undefined)
                     );
                     break;
             }
@@ -40,5 +90,9 @@ class Parser {
 
     get pageInstance() {
         return this._pageInstance;
+    }
+
+    getLooseProperties(count) {
+
     }
 }
