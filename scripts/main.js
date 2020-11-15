@@ -20,6 +20,8 @@ editorWindow.addEventListener(`keyup`, () => {
     }
 });
 
+editorWindow.addEventListener(`blur`, (ev) => ev.currentTarget.focus());
+
 generatePageWorker.onmessage = (ev => {
     const serialisedPageInstance = ev.data;
 
