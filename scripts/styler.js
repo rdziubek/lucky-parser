@@ -12,9 +12,9 @@ class Styler {
 
         static designateTagBoundaries(content, cssClass) {
             return content
-                .replace(MatchExpressions.STARTING_TAG_VERBOSE,
+                .replace(MatchExpressions.STARTING_TAG.VERBOSE,
                     `$1${cssClass}$2${Syntactics.STYLE_CLASS_CLOSING_TAG}$3`)
-                .replace(MatchExpressions.ENDING_TAG_VERBOSE, (_, remaining, tagName, bracket) =>
+                .replace(MatchExpressions.ENDING_TAG.VERBOSE, (_, remaining, tagName, bracket) =>
                     `${remaining}${tagName === null
                         ? tagName : `${cssClass}${tagName}${Syntactics.STYLE_CLASS_CLOSING_TAG}`
                     }${bracket}`);
@@ -22,7 +22,7 @@ class Styler {
 
         static designateTag(content, cssClass) {
             return content
-                .replace(MatchExpressions.ALL_UNTIL_NEXT_SCOPE_VERBOSE,
+                .replace(MatchExpressions.ALL_UNTIL_NEXT_SCOPE.VERBOSE,
                     `${cssClass}$1${Syntactics.STYLE_CLASS_CLOSING_TAG}${Syntactics.NEXT_SCOPE_POINTER}`);
         }
     }
@@ -31,7 +31,7 @@ class Styler {
 
         static designateTag(content, cssClass) {
             return content
-                .replace(MatchExpressions.ALL_UNTIL_NEXT_SCOPE,
+                .replace(MatchExpressions.ALL_UNTIL_NEXT_SCOPE.RENDERED,
                     `${cssClass}$1${Syntactics.STYLE_CLASS_CLOSING_TAG}$2`);
         }
     }
