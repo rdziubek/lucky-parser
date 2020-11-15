@@ -5,7 +5,7 @@ class InvalidTag extends Tag {
      */
     constructor(info) {
         const content = `${(info === undefined ?
-            `Not a valid tag!` : info)
+            `Taki tag nie istnieje!` : info)
         }${Syntactics.NEXT_SCOPE_POINTER}`;
 
         super(Styler.Rendered.designateTag(content, Syntactics.STYLE_CLASS_TAG.ERROR.INVALID),

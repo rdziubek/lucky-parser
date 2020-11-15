@@ -16,7 +16,7 @@ class Parser {
 
                     if (looseProperties.length !== 3) {
                         this._pageInstance.append(
-                            new InvalidTag(`Invalid tag signature`)
+                            new InvalidTag(`Zła sygnatura`)
                         );
                     } else {
                         const language = looseProperties[0][1];
@@ -38,7 +38,7 @@ class Parser {
 
                     if (looseProperties.length !== 4) {
                         this._pageInstance.append(
-                            new InvalidTag(`Invalid tag signature`)
+                            new InvalidTag(`Zła sygnatura`)
                         );
                     } else {
                         const mediaSource = new StringProperty(looseProperties[0][1]).value;
@@ -70,7 +70,7 @@ class Parser {
 
                     if (looseProperties.length !== 0) {
                         this._pageInstance.append(
-                            new InvalidTag(`Invalid tag signature`)
+                            new InvalidTag(`Zła sygnatura`)
                         );
                     } else {
                         this._pageInstance.append(
