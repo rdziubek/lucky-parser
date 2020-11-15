@@ -5,7 +5,7 @@ class NumberProperty extends Property {
         if (rawProperty.includes(`,`)) {
             const decimalPosition = rawProperty.indexOf(`,`);
             const totalPartValue = Number(rawProperty.substring(0, decimalPosition));
-            const decimalPartString = rawProperty.substring(decimalPosition, rawProperty.length);
+            const decimalPartString = rawProperty.substring(decimalPosition + 1, rawProperty.length);
 
             value = totalPartValue +
                 (decimalPartString !== undefined ?
