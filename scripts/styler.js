@@ -3,6 +3,8 @@ class Styler {
     static Verbose = class {
 
         static makeVerbose(content) {
+            content = content.replaceAll(Syntactics.LINE_BREAK.RENDERED, Syntactics.LINE_BREAK.VERBOSE);
+
             for (const [key, value] of Object.entries(HtmlEscapes)) {
                 content = content.replaceAll(key, value);
             }
@@ -32,7 +34,7 @@ class Styler {
         static designateTag(content, cssClass) {
             return content
                 .replace(MatchExpressions.ALL_UNTIL_NEXT_SCOPE.RENDERED,
-                    `${cssClass}$1${Syntactics.STYLE_CLASS_CLOSING_TAG}$2`);
+                    `${cssClass}$1${Syntactics.STYLE_CLASS_CLOSING_TAG}${Syntactics.NEXT_SCOPE_POINTER}`);
         }
     }
 }

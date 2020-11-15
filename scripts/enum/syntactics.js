@@ -15,5 +15,9 @@ const Syntactics = {
             INVALID: `<span class="error-invalid-tag">`,
         },
     },
-    STYLE_CLASS_CLOSING_TAG: `</span>`
+    STYLE_CLASS_CLOSING_TAG: `</span>`,
+    LINE_BREAK: {
+        VERBOSE: '\n',
+        RENDERED: '<br/>',
+    }
 }
