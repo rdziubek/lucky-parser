@@ -21,8 +21,8 @@ class Parser {
                             new InvalidTag(`Zła sygnatura`)
                         );
                     } else {
-                        const language = properties[0][1];
-                        const encoding = properties[1][1];
+                        const language = new StringProperty(properties[0][1]).value;
+                        const encoding = new StringProperty(properties[1][1]).value;
                         const title = new StringProperty(properties[2][1]).value;
 
                         this._pageInstance.append(
@@ -93,8 +93,8 @@ class Parser {
                             new InvalidTag(Strings.TAG.INVALID_SIGNATURE)
                         );
                     } else {
-                        const action = looseProperties[0][1]
-                        const method = looseProperties[1][1]
+                        const action = new StringProperty(looseProperties[0][1]).value;
+                        const method = new StringProperty(looseProperties[1][1]).value;
                         const inputDescriptions = [...tagScramble.description.matchAll(
                             MatchExpressions.TAG_SCRAMBLE_FORM_INPUT)][0][1]
                             .matchAll(MatchExpressions.TAG_SCRAMBLE_BRACKETS_CONTENT);
@@ -156,7 +156,7 @@ class Parser {
                         const width = new NumberProperty(looseProperties[0][1]).value;
                         const height = new NumberProperty(looseProperties[1][1]).value;
                         const source = new StringProperty(looseProperties[2][1]).value;
-                        const additionalAttribute = looseProperties[3][1];
+                        const additionalAttribute = new StringProperty(looseProperties[3][1]).value;
 
                         this._pageInstance.append(
                             new VideoTag(width, height, source, additionalAttribute)
@@ -176,7 +176,7 @@ class Parser {
                             new InvalidTag(Strings.TAG.INVALID_SIGNATURE)
                         );
                     } else {
-                        const type = looseProperties[0][1]
+                        const type = new StringProperty(looseProperties[0][1]).value;
                         const listElementsString = tagScramble.description
                             .match(MatchExpressions.TAG_SCRAMBLE_BRACKETS_INPUT)[1]
                             .match(MatchExpressions.TAG_SCRAMBLE_BRACKETS_CONTENT)[1]
