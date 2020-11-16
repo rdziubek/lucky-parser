@@ -24,6 +24,7 @@ importScripts(`../component/tag/video-tag.js`);
 importScripts(`../component/tag/list-tag.js`);
 importScripts(`../component/tag-scramble.js`);
 importScripts(`../parser.js`);
+importScripts(`../tabler.js`);
 
 onmessage = (e) => {
     const pageScramble = e.data;

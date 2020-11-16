@@ -38,8 +38,6 @@ class Parser {
                         const encoding = new StringProperty(properties[1][1]).value;
                         const title = new StringProperty(properties[2][1]).value;
 
-                        const parentSet = new ParentSet(language, encoding, title);
-
                         this._pageInstance.append(
                             new ParentSet(language, encoding, title, stylesString, cssClasses)
                         );
@@ -64,7 +62,6 @@ class Parser {
                         const height = new StringProperty(looseProperties[2][1]).value;
                         const alternative = new StringProperty(looseProperties[3][1]).value;
 
-                        const imgTag = new ImgTag(mediaSource, width, height, alternative);
 
                         this._pageInstance.append(
                             new ImgTag(mediaSource, width, height, alternative, stylesString, cssClasses)
@@ -73,26 +70,10 @@ class Parser {
                 }
                     break;
                 /**
-                 * Signature same as @see {@link TableTag}
-                 * + stylesString, ...cssClasses (specified in @see {@link Tag}).
-                 */
-                case TagNames.TABLE: {
-                    const looseProperties = [...tagScramble.description
-                        .matchAll(MatchExpressions.TAG_SCRAMBLE_PROPERTIES)];
-
-                    const tableTag = new TableTag();
-                }
-                    break;
-                /**
                  * Signature same as @see {@link DateTag}
                  * + stylesString, ...cssClasses (specified in @see {@link Tag}).
                  */
                 case TagNames.DATE: {
-                    const looseProperties = [...tagScramble.description
-                        .matchAll(MatchExpressions.TAG_SCRAMBLE_PROPERTIES)];
-
-                    const dateTag = new DateTag()
-
                     this._pageInstance.append(
                         new DateTag(stylesString, cssClasses)
                     );
@@ -132,8 +113,6 @@ class Parser {
                             }
                         }
 
-                        const formTag = new FormTag(action, method, inputs);
-
                         this._pageInstance.append(
                             new FormTag(action, method, inputs, stylesString, cssClasses)
                         );
@@ -155,8 +134,6 @@ class Parser {
                     } else {
                         const url = new StringProperty(looseProperties[0][1]).value;
                         const text = new StringProperty(looseProperties[1][1]).value;
-
-                        const aTag = new ATag(url, text);
 
                         this._pageInstance.append(
                             new ATag(url, text, stylesString, cssClasses)
@@ -181,8 +158,6 @@ class Parser {
                         const height = new StringProperty(looseProperties[1][1]).value;
                         const source = new StringProperty(looseProperties[2][1]).value;
                         const additionalAttribute = new StringProperty(looseProperties[3][1]).value;
-
-                        const videoTag = new VideoTag(width, height, source, additionalAttribute);
 
                         this._pageInstance.append(
                             new VideoTag(width, height, source, additionalAttribute, stylesString, cssClasses)
@@ -214,10 +189,51 @@ class Parser {
                             listElements.push(new StringProperty(element[1]).value);
                         }
 
-                        const listTag = new ListTag(type, listElements);
-
                         this._pageInstance.append(
                             new ListTag(type, listElements, stylesString, cssClasses)
+                        );
+                    }
+                }
+                    break;
+                /**
+                 * Signature same as @see {@link TableTag}
+                 * + stylesString, ...cssClasses (specified in @see {@link Tag}).
+                 */
+                case TagNames.TABLE: {
+                    let headerCellsString = ``;
+                    let bodyCellsString = ``;
+                    const headerCellsMatch = tagScramble.description
+                        .match(MatchExpressions.TAG_SCRAMBLE_TABLE_INPUT.HEADER);
+                    if (headerCellsMatch !== null) {
+                        headerCellsString = headerCellsMatch[1].trim();
+                    }
+                    const bodyCellsMatch = tagScramble.description
+                        .match(MatchExpressions.TAG_SCRAMBLE_TABLE_INPUT.BODY);
+                    if (bodyCellsMatch !== null) {
+                        bodyCellsString = bodyCellsMatch[1].trim();
+                    }
+
+                    const headerCells = headerCellsString
+                        .matchAll(MatchExpressions.SPACE_SEPARATED_PROPERTIES);
+                    const bodyCells = bodyCellsString
+                        .matchAll(MatchExpressions.SPACE_SEPARATED_PROPERTIES);
+
+                    if (headerCells == null || bodyCells == null) {
+                        this._pageInstance.append(
+                            new InvalidTag(Strings.TAG.INVALID_SIGNATURE)
+                        );
+                    } else {
+                        let listHeaderCells = [];
+                        for (const element of headerCells) {
+                            listHeaderCells.push(new StringProperty(element[1]).value);
+                        }
+                        let listBodyCells = [];
+                        for (const element of bodyCells) {
+                            listBodyCells.push(new StringProperty(element[1]).value);
+                        }
+
+                        this._pageInstance.append(
+                            new TableTag(listHeaderCells, listBodyCells, stylesString, cssClasses)
                         );
                     }
                 }

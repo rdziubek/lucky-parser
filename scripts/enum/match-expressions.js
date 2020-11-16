@@ -15,6 +15,10 @@ const MatchExpressions = {
     TAG_SCRAMBLE_PROPERTIES: /\s+((?:".*?")|(?:[^\s]+))/g,
     SPACE_SEPARATED_PROPERTIES: /((?:".*?")|(?:[^\s]+))/g,
     TAG_SCRAMBLE_FORM_INPUT: /.*?(input.*}).*?/g,
+    TAG_SCRAMBLE_TABLE_INPUT: {
+        HEADER: /nagłówek={(.*?)}/,
+        BODY: /ciało={(.*?)}/,
+    },
     TAG_SCRAMBLE_BRACKETS_INPUT: /.*?({.*?}).*?/,
     TAG_SCRAMBLE_BRACKETS_CONTENT: /{\s*(.*)\s*}/,
     TAG_SCRAMBLE_CLASSES_FOLLOWING_CURLY_BRACKETS: /.*}\s*(.*)>/g,
