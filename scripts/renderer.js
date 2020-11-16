@@ -1,7 +1,4 @@
 class Renderer {
-    static removeScopePointer() {
-
-    }
 
     static renderHelpWindow() {
         const window = document.querySelector('.help-window');

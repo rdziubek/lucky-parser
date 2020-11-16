@@ -250,8 +250,4 @@ class Parser {
     get pageInstance() {
         return this._pageInstance;
     }
-
-    getLooseProperties(count) {
-
-    }
 }
