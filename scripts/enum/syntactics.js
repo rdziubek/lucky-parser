@@ -1,5 +1,8 @@
 const Syntactics = {
-    NEXT_SCOPE_POINTER: `<-`,
+    NEXT_SCOPE_POINTER: {
+        VERBOSE: `&lt;-`,
+        RENDERED: `<-`,
+    },
     STYLE_CLASS_TAG: {
         VERBOSE: {
             PARENT_SET: `<span class="verbose-parent-tag-set">`,

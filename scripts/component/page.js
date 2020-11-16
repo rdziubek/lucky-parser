@@ -27,9 +27,9 @@ class Page extends Renderable {
 
     append(tag) {
         super.content = super.content
-            .replace(Syntactics.NEXT_SCOPE_POINTER, tag.content);
+            .replace(MatchExpressions.NEXT_SCOPE_POINTER.RENDERED, tag.content);
         super.verboseContent = super.verboseContent
-            .replace(Syntactics.NEXT_SCOPE_POINTER, tag.verboseContent);
+            .replace(MatchExpressions.NEXT_SCOPE_POINTER.VERBOSE, tag.verboseContent);
     }
 
     serialise() {

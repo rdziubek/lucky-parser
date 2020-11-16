@@ -25,7 +25,7 @@ class Styler {
         static designateTag(content, cssClass) {
             return content
                 .replace(MatchExpressions.ALL_UNTIL_NEXT_SCOPE.VERBOSE,
-                    `${cssClass}$1${Syntactics.STYLE_CLASS_CLOSING_TAG}${Syntactics.NEXT_SCOPE_POINTER}`);
+                    `${cssClass}$1${Syntactics.STYLE_CLASS_CLOSING_TAG}${Syntactics.NEXT_SCOPE_POINTER.VERBOSE}`);
         }
     }
 
@@ -34,7 +34,7 @@ class Styler {
         static designateTag(content, cssClass) {
             return content
                 .replace(MatchExpressions.ALL_UNTIL_NEXT_SCOPE.RENDERED,
-                    `${cssClass}$1${Syntactics.STYLE_CLASS_CLOSING_TAG}${Syntactics.NEXT_SCOPE_POINTER}`);
+                    `${cssClass}$1${Syntactics.STYLE_CLASS_CLOSING_TAG}${Syntactics.NEXT_SCOPE_POINTER.RENDERED}`);
         }
     }
 }

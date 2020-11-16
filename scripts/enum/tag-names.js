@@ -3,4 +3,5 @@ const TagNames = {
     IMG: `img`,
     TABLE: `tabela`,
     DATE: `data`,
+    FORM: `form`,
 }

@@ -28,3 +28,5 @@ generatePageWorker.onmessage = (ev => {
     rendererWindow.innerHTML = serialisedPageInstance.content;
     rendererVerboseWindow.innerHTML = serialisedPageInstance.verboseContent;
 });
+
+window.onload = () => (editorWindow.value !== `` ? generatePageWorker.postMessage(editorWindow.value) : null);

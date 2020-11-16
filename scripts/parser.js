@@ -1,7 +1,9 @@
 class Parser {
     constructor(pageScramble) {
         this._rawTagScrambles = pageScramble.matchAll(MatchExpressions.TAG_SCRAMBLE_ABSTRACT);
-        this._pageInstance = new Page(Syntactics.NEXT_SCOPE_POINTER, Syntactics.NEXT_SCOPE_POINTER);
+        this._pageInstance = new Page(
+            Syntactics.NEXT_SCOPE_POINTER.RENDERED,
+            Syntactics.NEXT_SCOPE_POINTER.VERBOSE);
 
         for (const rawScramble of this._rawTagScrambles) {
             const tagScramble = new TagScramble(rawScramble[1], rawScramble[2]);
@@ -11,17 +13,17 @@ class Parser {
                  * Signature same as @see {@link ParentSet}
                  */
                 case TagNames.PARENT_SET: {
-                    const looseProperties = [...tagScramble.description
-                        .matchAll(MatchExpressions.TAG_SCRAMBLE_LOOSE_PROPERTIES)];
+                    const properties = [...tagScramble.description
+                        .matchAll(MatchExpressions.TAG_SCRAMBLE_PROPERTIES)];
 
-                    if (looseProperties.length !== 3) {
+                    if (properties.length !== 3) {
                         this._pageInstance.append(
                             new InvalidTag(`Zła sygnatura`)
                         );
                     } else {
-                        const language = looseProperties[0][1];
-                        const encoding = looseProperties[1][1];
-                        const title = new StringProperty(looseProperties[2][1]).value;
+                        const language = properties[0][1];
+                        const encoding = properties[1][1];
+                        const title = new StringProperty(properties[2][1]).value;
 
                         this._pageInstance.append(
                             new ParentSet(language, encoding, title)
@@ -34,11 +36,11 @@ class Parser {
                  */
                 case TagNames.IMG: {
                     const looseProperties = [...tagScramble.description
-                        .matchAll(MatchExpressions.TAG_SCRAMBLE_LOOSE_PROPERTIES)];
+                        .matchAll(MatchExpressions.TAG_SCRAMBLE_PROPERTIES)];
 
                     if (looseProperties.length !== 4) {
                         this._pageInstance.append(
-                            new InvalidTag(`Zła sygnatura`)
+                            new InvalidTag(Strings.TAG.INVALID_SIGNATURE)
                         );
                     } else {
                         const mediaSource = new StringProperty(looseProperties[0][1]).value;
@@ -57,7 +59,7 @@ class Parser {
                  */
                 case TagNames.TABLE: {
                     const looseProperties = [...tagScramble.description
-                        .matchAll(MatchExpressions.TAG_SCRAMBLE_LOOSE_PROPERTIES)];
+                        .matchAll(MatchExpressions.TAG_SCRAMBLE_PROPERTIES)];
 
                 }
                     break;
@@ -66,15 +68,54 @@ class Parser {
                  */
                 case TagNames.DATE: {
                     const looseProperties = [...tagScramble.description
-                        .matchAll(MatchExpressions.TAG_SCRAMBLE_LOOSE_PROPERTIES)];
+                        .matchAll(MatchExpressions.TAG_SCRAMBLE_PROPERTIES)];
 
                     if (looseProperties.length !== 0) {
                         this._pageInstance.append(
-                            new InvalidTag(`Zła sygnatura`)
+                            new InvalidTag(Strings.TAG.INVALID_SIGNATURE)
                         );
                     } else {
                         this._pageInstance.append(
                             new DateTag()
+                        );
+                    }
+                }
+                    break;
+                /**
+                 * Signature same as @see {@link FormTag}
+                 */
+                case TagNames.FORM: {
+                    const looseProperties = [...tagScramble.description
+                        .matchAll(MatchExpressions.TAG_SCRAMBLE_PROPERTIES)];
+
+                    if (looseProperties.length < 3) {
+                        this._pageInstance.append(
+                            new InvalidTag(Strings.TAG.INVALID_SIGNATURE)
+                        );
+                    } else {
+                        const action = looseProperties[0][1]
+                        const method = looseProperties[1][1]
+                        const inputDescriptions = [...tagScramble.description.matchAll(
+                            MatchExpressions.TAG_SCRAMBLE_FORM_INPUT)][0][1]
+                            .matchAll(MatchExpressions.TAG_SCRAMBLE_BRACKETS_CONTENT);
+                        const inputs = [];
+
+                        for (const input of inputDescriptions) {
+                            if (input[1].trim().includes(` `)) {
+                                const delimiterPosition = input[1].indexOf(` `);
+                                const title = input[1].substring(0, delimiterPosition);
+                                const type = input[1].substring(delimiterPosition + 1, input[1].length);
+
+                                inputs.push(new InputTag(type, title));
+                            } else {
+                                const type = input[1].trim();
+
+                                inputs.push(new InputTag(type, undefined));
+                            }
+                        }
+
+                        this._pageInstance.append(
+                            new FormTag(action, method, inputs)
                         );
                     }
                 }

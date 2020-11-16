@@ -7,7 +7,7 @@ class ParentSet extends Tag {
     <title>${title}</title>
 </head>
 <body>
-${Syntactics.NEXT_SCOPE_POINTER}
+${Syntactics.NEXT_SCOPE_POINTER.RENDERED}
 </body>
 </html>`;
         const verboseContent = Styler.Verbose.designateTagBoundaries(
