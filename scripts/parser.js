@@ -8,6 +8,18 @@ class Parser {
         for (const rawScramble of this._rawTagScrambles) {
             const tagScramble = new TagScramble(rawScramble[1], rawScramble[2]);
 
+            let stylesString = null;                                    // null or one continuous string of css styling
+            const stylesStringMatch = tagScramble.description
+                .match(MatchExpressions.STYLE_ATTRIBUTE);
+            if (stylesStringMatch !== null) {
+                stylesString = stylesStringMatch[1].trim();
+            }
+
+            const cssClasses = [...tagScramble.description              // empty string or array of props (classes)
+                .matchAll(MatchExpressions.CLASS_ATTRIBUTES)]
+                .map(attributeMatch => attributeMatch[1])
+                .join(` `);
+
             switch (tagScramble.name) {
                 /**
                  * Signature same as @see {@link ParentSet}
@@ -27,11 +39,9 @@ class Parser {
                         const title = new StringProperty(properties[2][1]).value;
 
                         const parentSet = new ParentSet(language, encoding, title);
-                        parentSet.stylesString = ``;
-                        parentSet.cssClasses = [];
 
                         this._pageInstance.append(
-                            new ParentSet(language, encoding, title)
+                            new ParentSet(language, encoding, title, stylesString, cssClasses)
                         );
                     }
                 }
@@ -55,11 +65,9 @@ class Parser {
                         const alternative = new StringProperty(looseProperties[3][1]).value;
 
                         const imgTag = new ImgTag(mediaSource, width, height, alternative);
-                        imgTag.stylesString = ``;
-                        imgTag.cssClasses = [];
 
                         this._pageInstance.append(
-                            new ImgTag(mediaSource, width, height, alternative)
+                            new ImgTag(mediaSource, width, height, alternative, stylesString, cssClasses)
                         );
                     }
                 }
@@ -73,8 +81,6 @@ class Parser {
                         .matchAll(MatchExpressions.TAG_SCRAMBLE_PROPERTIES)];
 
                     const tableTag = new TableTag();
-                    tableTag.stylesString = ``;
-                    tableTag.cssClasses = [];
                 }
                     break;
                 /**
@@ -86,11 +92,9 @@ class Parser {
                         .matchAll(MatchExpressions.TAG_SCRAMBLE_PROPERTIES)];
 
                     const dateTag = new DateTag()
-                    dateTag.stylesString = ``;
-                    dateTag.cssClasses = [];
 
                     this._pageInstance.append(
-                        new DateTag()
+                        new DateTag(stylesString, cssClasses)
                     );
                 }
                     break;
@@ -129,11 +133,9 @@ class Parser {
                         }
 
                         const formTag = new FormTag(action, method, inputs);
-                        formTag.stylesString = ``;
-                        formTag.cssClasses = [];
 
                         this._pageInstance.append(
-                            new FormTag(action, method, inputs)
+                            new FormTag(action, method, inputs, stylesString, cssClasses)
                         );
                     }
                 }
@@ -155,11 +157,9 @@ class Parser {
                         const text = new StringProperty(looseProperties[1][1]).value;
 
                         const aTag = new ATag(url, text);
-                        aTag.stylesString = ``;
-                        aTag.cssClasses = [];
 
                         this._pageInstance.append(
-                            new ATag(url, text)
+                            new ATag(url, text, stylesString, cssClasses)
                         );
                     }
                 }
@@ -183,11 +183,9 @@ class Parser {
                         const additionalAttribute = new StringProperty(looseProperties[3][1]).value;
 
                         const videoTag = new VideoTag(width, height, source, additionalAttribute);
-                        videoTag.stylesString = ``;
-                        videoTag.cssClasses = [];
 
                         this._pageInstance.append(
-                            new VideoTag(width, height, source, additionalAttribute)
+                            new VideoTag(width, height, source, additionalAttribute, stylesString, cssClasses)
                         );
                     }
                 }
@@ -217,11 +215,9 @@ class Parser {
                         }
 
                         const listTag = new ListTag(type, listElements);
-                        listTag.stylesString = ``;
-                        listTag.cssClasses = [];
 
                         this._pageInstance.append(
-                            new ListTag(type, listElements)
+                            new ListTag(type, listElements, stylesString, cssClasses)
                         );
                     }
                 }

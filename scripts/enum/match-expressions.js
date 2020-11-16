@@ -18,7 +18,8 @@ const MatchExpressions = {
     TAG_SCRAMBLE_BRACKETS_INPUT: /.*?({.*?}).*?/,
     TAG_SCRAMBLE_BRACKETS_CONTENT: /{\s*(.*)\s*}/,
     TAG_SCRAMBLE_CLASSES_FOLLOWING_CURLY_BRACKETS: /.*}\s*(.*)>/g,
-    TAG_SCRAMBLE_CLASSES_CONTENT: /\.[A-Za-z0-9_-]/g,
+    STYLE_ATTRIBUTE: /styl="(.*)"/,
+    CLASS_ATTRIBUTES: /(?:\s\.)([A-Za-z0-9_-]+)/g,
     ALL_UNTIL_NEXT_SCOPE: {
         VERBOSE: /(.*)&lt;-$/s,
         RENDERED: /(.*)<-$/s,

@@ -1,6 +1,8 @@
 class ParentSet extends Tag {
-    constructor(language, encoding, title) {
-        const content = `<!DOCTYPE html>
+    constructor(language, encoding, title, stylesString, cssClasses) {
+        const content = `<!DOCTYPE html${
+            stylesString ? ` style="${stylesString}"` : ``}${
+            cssClasses !== `` ? ` class="${cssClasses}"` : ``}>
 <html lang="${language}">
 <head>
     <meta charset="${encoding}">

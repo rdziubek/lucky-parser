@@ -3,8 +3,10 @@
  * Signature: type, {"element"...}
  */
 class ListTag extends Tag {
-    constructor(type, listElements) {
-        const content = `<${type}>
+    constructor(type, listElements, stylesString, cssClasses) {
+        const content = `<${type}${
+            stylesString ? ` style="${stylesString}"` : ``}${
+            cssClasses !== `` ? ` class="${cssClasses}"` : ``}>
 ${listElements
             .map(element => `    <li>${element}</li>\n`)
             .join(``)
