@@ -19,7 +19,7 @@ class Parser {
 
                     if (properties.length < 3) {
                         this._pageInstance.append(
-                            new InvalidTag(`Zła sygnatura`)
+                            new InvalidTag(Strings.TAG.INVALID_SIGNATURE)
                         );
                     } else {
                         const language = new StringProperty(properties[0][1]).value;
