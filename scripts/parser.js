@@ -60,8 +60,8 @@ class Parser {
                         );
                     } else {
                         const mediaSource = new StringProperty(looseProperties[0][1]).value;
-                        const width = new NumberProperty(looseProperties[1][1]).value;
-                        const height = new NumberProperty(looseProperties[2][1]).value;
+                        const width = new StringProperty(looseProperties[1][1]).value;
+                        const height = new StringProperty(looseProperties[2][1]).value;
                         const alternative = new StringProperty(looseProperties[3][1]).value;
 
                         const imgTag = new ImgTag(mediaSource, width, height, alternative);
@@ -177,8 +177,8 @@ class Parser {
                             new InvalidTag(Strings.TAG.INVALID_SIGNATURE)
                         );
                     } else {
-                        const width = new NumberProperty(looseProperties[0][1]).value;
-                        const height = new NumberProperty(looseProperties[1][1]).value;
+                        const width = new StringProperty(looseProperties[0][1]).value;
+                        const height = new StringProperty(looseProperties[1][1]).value;
                         const source = new StringProperty(looseProperties[2][1]).value;
                         const additionalAttribute = new StringProperty(looseProperties[3][1]).value;
 
