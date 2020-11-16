@@ -16,10 +16,9 @@ class Styler {
             return content
                 .replace(MatchExpressions.STARTING_TAG.VERBOSE,
                     `$1${cssClass}$2${Syntactics.STYLE_CLASS_CLOSING_TAG}$3`)
-                .replace(MatchExpressions.ENDING_TAG.VERBOSE, (_, remaining, tagName, bracket) =>
-                    `${remaining}${tagName === null
-                        ? tagName : `${cssClass}${tagName}${Syntactics.STYLE_CLASS_CLOSING_TAG}`
-                    }${bracket}`);
+                .replace(MatchExpressions.ENDING_TAG.VERBOSE, (_, remaining, tagName, bracket, pointer) =>
+                    `${remaining}${cssClass}${tagName}${Syntactics.STYLE_CLASS_CLOSING_TAG}${bracket}${
+                        pointer !== undefined ? pointer : ``}`);
         }
 
         static designateTag(content, cssClass) {

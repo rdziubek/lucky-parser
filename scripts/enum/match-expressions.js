@@ -7,7 +7,7 @@ const MatchExpressions = {
         VERBOSE: /(&lt;)(\w+)(.*)/,
     },
     ENDING_TAG: {
-        VERBOSE: /(.*?)(\w+)(&gt;)(?:$|(?:\n&lt;-$))/,
+        VERBOSE: /(.*?)(\w+)(&gt;)(?:$|(\n&lt;-$))/,
     },
     TAG_UNCLOSED: ``,
     TAG_SCRAMBLE_ABSTRACT: /<\s*(\w+)(.*?)>/g,
