@@ -160,8 +160,36 @@ class Parser {
 
                         this._pageInstance.append(
                             new VideoTag(width, height, source, additionalAttribute)
-                        )
-                        ;
+                        );
+                    }
+                }
+                    break;
+                /**
+                 * Signature same as @see {@link ListTag}
+                 */
+                case TagNames.LIST: {
+                    const looseProperties = [...tagScramble.description
+                        .matchAll(MatchExpressions.TAG_SCRAMBLE_PROPERTIES)];
+
+                    if (looseProperties.length < 2) {
+                        this._pageInstance.append(
+                            new InvalidTag(Strings.TAG.INVALID_SIGNATURE)
+                        );
+                    } else {
+                        const type = looseProperties[0][1]
+                        const listElementsString = tagScramble.description
+                            .match(MatchExpressions.TAG_SCRAMBLE_BRACKETS_INPUT)[1]
+                            .match(MatchExpressions.TAG_SCRAMBLE_BRACKETS_CONTENT)[1]
+                            .matchAll(MatchExpressions.SPACE_SEPARATED_PROPERTIES);
+
+                        let listElements = [];
+                        for (const element of listElementsString) {
+                            listElements.push(new StringProperty(element[1]).value);
+                        }
+
+                        this._pageInstance.append(
+                            new ListTag(type, listElements)
+                        );
                     }
                 }
                     break;

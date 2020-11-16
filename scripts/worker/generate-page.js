@@ -21,6 +21,7 @@ importScripts(`../component/tag/form-tag.js`);
 importScripts(`../component/tag/input-tag.js`);
 importScripts(`../component/tag/a-tag.js`);
 importScripts(`../component/tag/video-tag.js`);
+importScripts(`../component/tag/list-tag.js`);
 importScripts(`../component/tag-scramble.js`);
 importScripts(`../parser.js`);
 

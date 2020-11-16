@@ -1,9 +1,7 @@
 class DateTag extends Tag {
     constructor() {
-        const content = `<span id='datetime'>testhere</span>${
-            Syntactics.LINE_BREAK.RENDERED}${Syntactics.NEXT_SCOPE_POINTER.RENDERED}<script>setTimeout(() => {
-    document.getElementById('datetime').innerHTML = new Date().toLocaleString();
-} ,1000)</script>`;
+        const content = `<span id="datetime">pobieranie&hellip;</span>${
+            Syntactics.LINE_BREAK.RENDERED}${Syntactics.NEXT_SCOPE_POINTER.RENDERED}`;
         const verboseContent = Styler.Verbose.designateTagBoundaries(
             Styler.Verbose.makeVerbose(content), Syntactics.STYLE_CLASS_TAG.VERBOSE.CURRENT_DATE);
 

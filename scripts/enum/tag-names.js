@@ -3,7 +3,8 @@ const TagNames = {
     IMG: `img`,
     TABLE: `tabela`,
     DATE: `data`,
-    FORM: `form`,
-    A: `a`,
-    VIDEO: `video`,
+    FORM: `formularz`,
+    A: `link`,
+    VIDEO: `wideo`,
+    LIST: `lista`,
 }

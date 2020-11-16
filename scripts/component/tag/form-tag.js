@@ -4,8 +4,6 @@
  */
 class FormTag extends Tag {
     constructor(action, method, formInputs) {
-        let inputsLiteral = ``;
-
         const content = `<form action="${action}" method="${method}">
 ${formInputs
             .map(input => input.content)
