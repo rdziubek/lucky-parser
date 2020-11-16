@@ -4,10 +4,11 @@ const editorWindow = document.querySelector(`.editor`);
 const rendererWindow = document.querySelector(`.renderer-window`);
 const rendererVerboseWindow = document.querySelector(`.renderer-verbose-window`);
 const generatePageWorker = new Worker(`scripts/worker/generate-page.js`);
+const buttonHelpClose = document.querySelector(`.help-window`);
 
-rendererWindow.addEventListener(`dblclick`, () => {
-    alert(`you have requested help!`);
-});
+buttonHelpClose.addEventListener(`click`, () => Renderer.removeHelpWindow());
+
+rendererWindow.addEventListener(`dblclick`, () => Renderer.renderHelpWindow());
 
 editorWindow.addEventListener(`input`, () => {
     const scrambledPageDescription = editorWindow.value;

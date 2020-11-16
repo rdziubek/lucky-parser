@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="css/main.css">
     <link rel="icon" href="images/logotype32.png">
     <link rel="manifest" href="manifest.json">
+    <script src="scripts/renderer.js"></script>
     <script src="scripts/enum/match-expressions.js"></script>
     <script src="scripts/enum/strings.js"></script>
     <script src="scripts/enum/syntactics.js"></script>
@@ -19,10 +20,18 @@
 </head>
 <body>
 <div class="wrapper">
+    <section class="help-window">
+        <h1>Pomoc</h1>
+        <img class="button-back" tabindex="0" src="images/button-back.svg" alt="Go back">
+        <ul>
+            <li><span class="usage-string-emphasized"><-</span> wskazuje miejsce kolejnego tagu,</li>
+        </ul>
+    </section>
+
     <label for="editor-textarea" class="sr-only">Edytor</label>
     <textarea class="editor" id="editor-textarea" autofocus></textarea>
     <section class="renderer-window">
-        <p class="help">Aby wyświelić pomoc,<br/>kliknij tutaj dwukrotnie</p>
+        <p class="usage-string">Aby wyświelić pomoc,<br/>kliknij tutaj dwukrotnie</p>
     </section>
     <section class="renderer-verbose-window"></section>
 </div>

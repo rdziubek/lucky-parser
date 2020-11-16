@@ -1,9 +1,17 @@
 class Renderer {
-    static makeFile() {
+    static removeScopePointer() {
 
     }
 
-    static removeScopePointer() {
+    static renderHelpWindow() {
+        const window = document.querySelector('.help-window');
 
+        window.style.display = 'flex';
+    }
+
+    static removeHelpWindow() {
+        const window = document.querySelector('.help-window');
+
+        window.style.display = 'none';
     }
 }
