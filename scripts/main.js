@@ -4,7 +4,7 @@ const editorWindow = document.querySelector(`.editor`);
 const rendererWindow = document.querySelector(`.renderer-window`);
 const rendererVerboseWindow = document.querySelector(`.renderer-verbose-window`);
 const generatePageWorker = new Worker(`scripts/worker/generate-page.js`);
-const buttonHelpClose = document.querySelector(`.help-window`);
+const buttonHelpClose = document.querySelector(`.help-window .button-back`);
 
 buttonHelpClose.addEventListener(`click`, () => Renderer.removeHelpWindow());
 
