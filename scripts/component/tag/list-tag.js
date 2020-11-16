@@ -8,9 +8,9 @@ class ListTag extends Tag {
             stylesString ? ` style="${stylesString}"` : ``}${
             cssClasses !== `` ? ` class="${cssClasses}"` : ``}>
 ${listElements
-            .map(element => `    <li>${element}</li>\n`)
-            .join(``)
-        }</${type}>${
+            .map(element => `    <li>${element}</li>`)
+            .join(`\n`)}
+</${type}>${
             Syntactics.LINE_BREAK.RENDERED}${Syntactics.NEXT_SCOPE_POINTER.RENDERED}`;
         const verboseContent = Styler.Verbose.designateTagBoundaries(
             Styler.Verbose.makeVerbose(content), Syntactics.STYLE_CLASS_TAG.VERBOSE.FORM);
