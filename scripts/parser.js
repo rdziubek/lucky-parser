@@ -120,6 +120,51 @@ class Parser {
                     }
                 }
                     break;
+                /**
+                 * Signature same as @see {@link ATag}
+                 */
+                case TagNames.A: {
+                    const looseProperties = [...tagScramble.description
+                        .matchAll(MatchExpressions.TAG_SCRAMBLE_PROPERTIES)];
+
+                    if (looseProperties.length < 2) {
+                        this._pageInstance.append(
+                            new InvalidTag(Strings.TAG.INVALID_SIGNATURE)
+                        );
+                    } else {
+                        const url = new StringProperty(looseProperties[0][1]).value;
+                        const text = new StringProperty(looseProperties[1][1]).value;
+
+                        this._pageInstance.append(
+                            new ATag(url, text)
+                        );
+                    }
+                }
+                    break;
+                /**
+                 * Signature same as @see {@link VideoTag}
+                 */
+                case TagNames.VIDEO: {
+                    const looseProperties = [...tagScramble.description
+                        .matchAll(MatchExpressions.TAG_SCRAMBLE_PROPERTIES)];
+
+                    if (looseProperties.length < 4) {
+                        this._pageInstance.append(
+                            new InvalidTag(Strings.TAG.INVALID_SIGNATURE)
+                        );
+                    } else {
+                        const width = new NumberProperty(looseProperties[0][1]).value;
+                        const height = new NumberProperty(looseProperties[1][1]).value;
+                        const source = new StringProperty(looseProperties[2][1]).value;
+                        const additionalAttribute = looseProperties[3][1];
+
+                        this._pageInstance.append(
+                            new VideoTag(width, height, source, additionalAttribute)
+                        )
+                        ;
+                    }
+                }
+                    break;
                 default:
                     this._pageInstance.append(
                         new InvalidTag(undefined)

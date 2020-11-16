@@ -4,4 +4,6 @@ const TagNames = {
     TABLE: `tabela`,
     DATE: `data`,
     FORM: `form`,
+    A: `a`,
+    VIDEO: `video`,
 }
