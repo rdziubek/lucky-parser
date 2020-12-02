@@ -20,7 +20,7 @@ const MatchExpressions = {
         BODY: /ciało={(.*?)}/,
     },
     TAG_SCRAMBLE_BRACKETS_INPUT: /.*?({.*?}).*?/,
-    TAG_SCRAMBLE_BRACKETS_CONTENT: /{\s*(.*)\s*}/,
+    TAG_SCRAMBLE_BRACKETS_CONTENT: /{\s*(.*)\s*}/g,
     TAG_SCRAMBLE_CLASSES_FOLLOWING_CURLY_BRACKETS: /.*}\s*(.*)>/g,
     STYLE_ATTRIBUTE: /styl="(.*)"/,
     CLASS_ATTRIBUTES: /(?:\s\.)([A-Za-z0-9_-]+)/g,
