@@ -96,24 +96,29 @@ class Parser {
                         const method = new StringProperty(looseProperties[1][1]).value;
                         const inputDescriptions = [...tagScramble.description.matchAll(
                             MatchExpressions.TAG_SCRAMBLE_FORM_INPUT)][0][1]
-                            .matchAll(MatchExpressions.TAG_SCRAMBLE_BRACKETS_CONTENT);
+                            .matchAll(MatchExpressions.TAG_SCRAMBLE_BRACKETS_CONTENT_NON_GREEDY_MULTIPLE);
                         const inputs = [];
 
                         for (const input of inputDescriptions) {
+                            console.log('INPUT', input);
                             const inputDefinition = input[1];
-                            const looseProperties = [...inputDefinition
+                            const inputProperties = [...inputDefinition
+                                .match(MatchExpressions.TAG_SCRAMBLE_BRACKETS_CONTENT)[1]
                                 .matchAll(MatchExpressions.SPACE_SEPARATED_PROPERTIES)];
                             let title = null;
                             let type = null;
 
-                            if (looseProperties.length < 2) {
+                            console.log('props', inputProperties);
+                            if (inputProperties.length < 2) {
                                 title = null;
                                 type = null;
-                            } else if (looseProperties.length === 1) {
-                                type = new StringProperty(looseProperties[0][1]).value;
+                            } else if (inputProperties.length === 1) {
+                                title = null;
+                                type = new StringProperty(inputProperties[0][1]).value;
                             } else {
-                                title = new StringProperty(looseProperties[0][1]).value;
-                                type = new StringProperty(looseProperties[1][1]).value;
+                                console.log(inputProperties.length);
+                                title = new StringProperty(inputProperties[0][1]).value;
+                                type = new StringProperty(inputProperties[1][1]).value;
                             }
 
                             inputs.push(new InputTag(type, title));
@@ -186,7 +191,7 @@ class Parser {
                     } else {
                         const type = new StringProperty(looseProperties[0][1]).value;
                         const listElementsString = tagScramble.description
-                            .match(MatchExpressions.TAG_SCRAMBLE_BRACKETS_INPUT)[1]
+                            .match(MatchExpressions.TAG_SCRAMBLE_BRACKETS_CONTENT_NON_GREEDY)[1]
                             .match(MatchExpressions.TAG_SCRAMBLE_BRACKETS_CONTENT)[1]
                             .matchAll(MatchExpressions.SPACE_SEPARATED_PROPERTIES);
 
