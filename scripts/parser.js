@@ -100,17 +100,23 @@ class Parser {
                         const inputs = [];
 
                         for (const input of inputDescriptions) {
-                            if (input[1].trim().includes(` `)) {
-                                const delimiterPosition = input[1].indexOf(` `);
-                                const title = input[1].substring(0, delimiterPosition);
-                                const type = input[1].substring(delimiterPosition + 1, input[1].length);
+                            const inputDefinition = input[1];
+                            const looseProperties = [...inputDefinition
+                                .matchAll(MatchExpressions.SPACE_SEPARATED_PROPERTIES)];
+                            let title = null;
+                            let type = null;
 
-                                inputs.push(new InputTag(type, title));
+                            if (looseProperties.length < 2) {
+                                title = null;
+                                type = null;
+                            } else if (looseProperties.length === 1) {
+                                type = new StringProperty(looseProperties[0][1]).value;
                             } else {
-                                const type = input[1].trim();
-
-                                inputs.push(new InputTag(type, undefined));
+                                title = new StringProperty(looseProperties[0][1]).value;
+                                type = new StringProperty(looseProperties[1][1]).value;
                             }
+
+                            inputs.push(new InputTag(type, title));
                         }
 
                         this._pageInstance.append(
